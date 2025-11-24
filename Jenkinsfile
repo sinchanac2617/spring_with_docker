@@ -42,19 +42,16 @@ pipeline {
 }
 
 
-        stage('Deploy to App Server') {
-            steps {
-                sshagent(credentials: ['app-server-ssh-key']) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER_IP} '
-                          docker pull ${DOCKER_IMAGE}:latest &&
-                          cd /opt/myapp &&
-                          docker compose -f docker-compose.yml up -d
-                        '
-                    """
-                }
-            }
+       stage('Deploy to App Server') {
+    steps {
+        sshagent(credentials: ['app-server-ssh-key']) {
+            sh """
+                ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER_IP} "docker pull ${DOCKER_IMAGE}:latest && cd /opt/myapp && docker compose -f docker-compose.yml up -d"
+            """
         }
+    }
+}
+
     }
 
     post {
