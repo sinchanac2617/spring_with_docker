@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "vishnu2663/my-spring-app"  // change
-        APP_SERVER_IP = "13.203.94.209"             // change
+        DOCKER_IMAGE = "sinchanac2617/my-spring-app"  // change
+        APP_SERVER_IP = "13.234.7.74"             // change this public ip of app server
     }
 
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
-                // or: git 'https://github.com/yourname/yourrepo.git'
+                // or: git 'https://github.com/sinchanac2617/spring_with_docker.git'
             }
         }
 
