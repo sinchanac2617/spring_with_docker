@@ -1,182 +1,924 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luxury Watches</title>
+  <meta charset="UTF-8" />
+  <title>Nova Style Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
+  <style>
+    :root {
+      --bg-dark: #050b1a;
+      --bg-dark-2: #091026;
+      --card-bg: #0f1835;
+      --accent-pink: #ff4fa3;
+      --accent-pink-soft: rgba(255, 79, 163, 0.18);
+      --text-main: #f8f7ff;
+      --text-muted: #b1b6d9;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-        margin: 0;
-        font-family: 'Times New Roman', serif;
-        background-color: black;
-        color: gold;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #101b3d 0%, #050816 50%, #02030a 100%);
+      color: var(--text-main);
+      min-height: 100vh;
     }
 
+    /* Top bar */
     header {
-        background: linear-gradient(to right, black, #b8860b);
-        padding: 25px;
-        text-align: center;
-        font-size: 45px;
-        letter-spacing: 3px;
-        font-weight: bold;
-        text-transform: uppercase;
-        box-shadow: 0 0 25px gold;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(26px);
+      background: linear-gradient(to right, rgba(5, 11, 26, 0.9), rgba(14, 9, 40, 0.9));
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 16px 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .nav {
-        display: flex;
-        justify-content: center;
-        gap: 45px;
-        font-size: 20px;
-        padding: 18px;
-        border-bottom: 1px solid gold;
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .nav a {
-        color: gold;
-        text-decoration: none;
-        transition: 0.4s;
+    .logo-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffe6f3 0%, #ff4fa3 45%, #ff0077 100%);
+      box-shadow: 0 0 18px rgba(255, 79, 163, 0.7);
     }
 
-    .nav a:hover {
-        color: white;
-        text-shadow: 0 0 12px gold;
-        transform: scale(1.15);
+    nav {
+      display: flex;
+      gap: 22px;
+      font-size: 0.9rem;
     }
 
-    .category {
-        padding: 40px 0;
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.25s ease, border-color 0.25s ease;
     }
 
-    .category h2 {
-        text-align: center;
-        font-size: 38px;
-        margin-bottom: 25px;
-        text-shadow: 0 0 15px gold;
+    nav a:hover {
+      color: var(--accent-pink);
+      border-color: var(--accent-pink);
     }
 
-    .items {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-        padding: 0 20px;
+    .cta-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff4fa3, #ff8ac9);
+      border: none;
+      color: #05030f;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-size: 0.75rem;
+      box-shadow: 0 0 18px rgba(255, 79, 163, 0.65);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .item {
-        background: rgba(48, 35, 0, 0.65);
-        width: 270px;
-        border: 1px solid gold;
-        border-radius: 12px;
-        overflow: hidden;
-        transition: 0.5s;
-        cursor: pointer;
-        box-shadow: 0 0 10px black;
+    .cta-btn:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 0 26px rgba(255, 79, 163, 0.9);
     }
 
-    .item img {
-        width: 100%;
-        height: 240px;
-        object-fit: cover;
-        transition: 0.5s;
+    /* Hero */
+    .hero {
+      padding: 32px 6vw 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+      gap: 36px;
+      align-items: center;
     }
 
-    .item:hover img {
-        transform: scale(1.13);
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 3.2vw, 3.3rem);
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
 
-    .item:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 0 25px gold;
+    .hero-highlight {
+      background: linear-gradient(120deg, #ff4fa3, #ffc5e1);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
-    .item h3 {
-        text-align: center;
-        padding: 15px 10px;
-        margin: 0;
-        font-size: 22px;
+    .hero-text p {
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .hero-pill {
+      border-radius: 999px;
+      border: 1px solid var(--accent-pink-soft);
+      padding: 5px 11px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(7, 14, 40, 0.8);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--accent-pink);
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #0f0;
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-stat strong {
+      color: var(--text-main);
+      display: block;
+      font-size: 1.1rem;
+    }
+
+    .hero-banner {
+      position: relative;
+      border-radius: 22px;
+      padding: 16px;
+      background: radial-gradient(circle at top left, #ff4fa3 0%, #0c1027 45%, #050714 100%);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-banner img {
+      width: 100%;
+      border-radius: 18px;
+      display: block;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+      transform-origin: center;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-banner:hover img {
+      transform: scale(1.03);
+    }
+
+    .hero-banner-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(5, 10, 30, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .hero-banner-badge {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      background: rgba(5, 10, 28, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--text-muted);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-banner-badge strong {
+      display: block;
+      color: var(--accent-pink);
+      font-size: 0.9rem;
+    }
+
+    /* Sections */
+    .page {
+      padding: 10px 6vw 60px;
+    }
+
+    .section {
+      margin-top: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent-pink), transparent);
+    }
+
+    .section-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+    }
+
+    /* Product card with transition effect */
+    .product-card {
+      position: relative;
+      background: radial-gradient(circle at top, #182245 0%, #050814 75%);
+      border-radius: 18px;
+      padding: 10px;
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-pink-soft);
+      background: radial-gradient(circle at top, rgba(255, 79, 163, 0.26) 0%, #050814 65%);
+      box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.9),
+        0 0 22px rgba(255, 79, 163, 0.24);
+    }
+
+    .product-img-wrapper {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: #050714;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1);
+      transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.06) translateY(-2px);
+      filter: brightness(1.05) contrast(1.03);
+    }
+
+    .product-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5, 4, 20, 0.9), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(5, 8, 35, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .product-price-tag {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(5, 8, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--accent-pink);
+    }
+
+    .product-info {
+      margin-top: 8px;
+      padding: 2px 2px 4px;
+    }
+
+    .product-title {
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .product-price {
+      color: var(--accent-pink);
+      font-weight: 600;
+    }
+
+    .product-tagline {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Category chips row */
+    .category-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .category-chip {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      background: rgba(8, 14, 42, 0.9);
     }
 
     footer {
-        text-align: center;
-        padding: 20px;
-        background: #0d0d0d;
-        border-top: 1px solid gold;
-        margin-top: 40px;
-        font-size: 18px;
+      padding: 20px 6vw 30px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #040714;
     }
-</style>
+
+    /* Responsive tweaks */
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      nav {
+        display: none;
+      }
+
+      header {
+        padding-inline: 4vw;
+      }
+
+      .page {
+        padding-inline: 4vw;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<header>
-    Luxury Watches Collection
-           by Vishnu
-</header>
 
-<!-- Navigation -->
-<div class="nav">
-    <a href="#rolex">ROLEX</a>
-    <a href="#omega">OMEGA</a>
-    <a href="#patek">PATEK PHILIPPE</a>
-    <a href="#ap">AUDEMARS PIGUET</a>
-    <a href="#cartier">CARTIER</a>
-</div>
-
-<!-- Rolex -->
-<section class="category" id="rolex">
-    <h2>ROLEX COLLECTION</h2>
-    <div class="items">
-        <div class="item"><img src="https://cdn.shopify.com/s/files/1/0278/9723/3501/files/Rolex-Sea-Dweller-Rolesor-2.jpg?v=1660140080"><h3>Submariner (Gold)</h3></div>
-        <div class="item"><img src="https://guesswatches.com/cdn/shop/files/Recommended_480x600_F25_Pairs.png?v=1755264131&width=720"><h3>Day-Date 40</h3></div>
-        <div class="item"><img src="https://teddybaldassarre.com/cdn/shop/articles/Tudor-BB-Fifty-Eight-YG-FI_70e85ad1-0c3f-4d07-a3e9-8c61b952a8dc.jpg?v=1760169779"><h3>Oyster Perpetual</h3></div>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <span class="logo-badge"></span>
+      Nova Shop
     </div>
-</section>
 
-<!-- Omega -->
-<section class="category" id="omega">
-    <h2>OMEGA COLLECTION</h2>
-    <div class="items">
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Funmapped%2Fv1%2Fgenerated%2Ffinal_1730457638_46b9dd2b0ba8_e0d0979630ca3ac8d9a4b2b7451e010e_3696_50_31_da_v1_zout.png&w=3840&q=75"><h3>Seamaster</h3></div>
-        <div class="item"><img src="https://www.shutterstock.com/image-photo/omega-seamaster-luxury-watches-expensive-260nw-2649558837.jpg"><h3>Speedmaster</h3></div>
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Fomega%2F46b9dd2b0ba8_final_1730114498_f98629e2eeb6da09dda282440f165ff4_omega_dynamicdateiii_5200.50.00_01_v1_zout.png&w=3840&q=75"><h3>Constellation</h3></div>
+    <nav>
+      <a href="#featured">Featured</a>
+      <a href="#women">Women</a>
+      <a href="#men">Men</a>
+      <a href="#gadgets">Gadgets</a>
+      <a href="#home">Home</a>
+      <a href="#offers">Offers</a>
+    </nav>
+
+    <button class="cta-btn">Sign In</button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Live • Dark Blue & Pink Exclusive Store
+      </p>
+      <h1>
+        Shop the <span class="hero-highlight">midnight collection</span> with
+        neon pink vibes.
+      </h1>
+
+      <p>
+        A stylish shopping layout with multiple sections, sample product images
+        (using image URLs), and a smooth hover transition effect on every card.
+      </p>
+
+      <div class="hero-pill-row">
+        <span class="hero-pill">Dark Blue UI</span>
+        <span class="hero-pill">Pink Accent Details</span>
+        <span class="hero-pill">Hover Transitions</span>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>50+</strong>
+          Sample products layout
+        </div>
+        <div class="hero-stat">
+          <strong>6</strong>
+          Different sections
+        </div>
+      </div>
     </div>
-</section>
 
-<!-- Patek -->
-<section class="category" id="patek">
-    <h2>PATEK PHILIPPE COLLECTION</h2>
-    <div class="items">
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Fpatek_philippe%2Ffinal_1724473563_faa65f0fc4c5b7cdeb28a5f20c36bbd4_patek-philippe-complications-chronograph-5070j-001-men-watch-502820_540x_v1_zout.png&w=3840&q=75"><h3>Nautilus</h3></div>
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Fpatek_philippe%2Ffinal_1724321117_f0e7a14c7f_5070r-001-2c_v1_zout.png&w=3840&q=75"><h3>Aquanaut</h3></div>
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Fpatek_philippe%2F5d03c94380b7a6673f8ec0fd6ea17416_Calatrava-1.jpg&w=3840&q=75"><h3>Grand Complication</h3></div>
+    <div class="hero-banner">
+      <!-- Sample hero image using URL, like copying image address -->
+      <span class="hero-banner-tag">New • Night Sale</span>
+      <img
+        src="https://images.pexels.com/photos/7671166/pexels-photo-7671166.jpeg"
+        alt="Fashion shopping neon style"
+      />
+      <div class="hero-banner-badge">
+        <strong>Extra 30% OFF</strong>
+        Use code: MIDNIGHTPINK
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- Audemars Piguet -->
-<section class="category" id="ap">
-    <h2>AUDEMARS PIGUET COLLECTION</h2>
-    <div class="items">
-        <div class="item"><img src="https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Audemars_Piguet_Royal_Oak_Gold.jpg"><h3>Royal Oak</h3></div>
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Faudemars_piguet%2Ffinal_1724502258_Untitleddesign_84_47155871-d1a8-4c5b-b86e_v1_zout.png&w=3840&q=75"><h3>Millenary</h3></div>
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Faudemars_piguet%2Ffinal_1724407913_d84f64931581f35139d59e86145f2ffa_audemars-piguet-77240OR.ZZ.A001CR.01_v1_zout.png&w=3840&q=75"><h3>Code 11:59</h3></div>
-    </div>
-</section>
+  <!-- MAIN PAGE CONTENT -->
+  <main class="page">
 
-<!-- Cartier -->
-<section class="category" id="cartier">
-    <h2>CARTIER COLLECTION</h2>
-    <div class="items">
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Funmapped%2Fv1%2Fgenerated%2Fu2net_final_1731057611_0a4e3021cf390457bd9e040de1332a81_17311411_1.png&w=3840&q=75"><h3>Santos de Cartier</h3></div>
-        <div class="item"><img src="https://goldammer.me/cdn/shop/files/preview_images/2025-KW47-WRB-10_1024x1024.jpg?v=1763627647"><h3>Tank Louis</h3></div>
-        <div class="item"><img src="https://www.coveted.com/_next/image?url=https%3A%2F%2Fassets.coveted.com%2Fwatches%2Fimages%2Funmapped%2Fv1%2Fgenerated%2Ffinal_1730697339_46b9dd2b0ba8_lpo.png&w=3840&q=75"><h3>Ballon Bleu</h3></div>
-    </div>
-</section>
+    <!-- CATEGORY TAGS OVERVIEW -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Browse by Category</div>
+        <div class="section-subtitle">Explore the sections below</div>
+      </div>
+      <div class="category-row">
+        <span class="category-chip">👗 Women’s Fashion</span>
+        <span class="category-chip">🧥 Men’s Fashion</span>
+        <span class="category-chip">📱 Gadgets</span>
+        <span class="category-chip">🏠 Home Decor</span>
+        <span class="category-chip">👟 Footwear</span>
+        <span class="category-chip">💎 Accessories</span>
+        <span class="category-chip">🔥 Deals & Offers</span>
+      </div>
+    </section>
 
-<footer>
-    © 2025 Luxury Watches Collection – All Rights Reserved
-</footer>
+    <!-- FEATURED -->
+    <section class="section" id="featured">
+      <div class="section-header">
+        <div class="section-title">Featured Picks</div>
+        <p class="section-subtitle">Hand-picked items from every category</p>
+      </div>
+
+      <div class="products-grid">
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <!-- Image address as if copied from Google image (stock sample) -->
+            <img
+              src="https://images.pexels.com/photos/7671265/pexels-photo-7671265.jpeg"
+              alt="Woman holding shopping bags"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Trending</span>
+            <span class="product-price-tag">$59</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Neon Street Jacket</h3>
+            <div class="product-meta">
+              <span>Women • Outerwear</span>
+              <span class="product-price">$59.00</span>
+            </div>
+            <p class="product-tagline">Dark navy with pink details.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/7671162/pexels-photo-7671162.jpeg"
+              alt="Colorful sneakers"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">New</span>
+            <span class="product-price-tag">$79</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Midnight Runner Sneakers</h3>
+            <div class="product-meta">
+              <span>Unisex • Footwear</span>
+              <span class="product-price">$79.00</span>
+            </div>
+            <p class="product-tagline">Gradient blue & pink soles.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/6311656/pexels-photo-6311656.jpeg"
+              alt="Smartwatch on hand"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Best Seller</span>
+            <span class="product-price-tag">$129</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Glowline Smartwatch</h3>
+            <div class="product-meta">
+              <span>Gadgets</span>
+              <span class="product-price">$129.00</span>
+            </div>
+            <p class="product-tagline">Dark theme with neon interface.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/3965552/pexels-photo-3965552.jpeg"
+              alt="Home decor lamp"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Limited</span>
+            <span class="product-price-tag">$39</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Lunar Glow Lamp</h3>
+            <div class="product-meta">
+              <span>Home Decor</span>
+              <span class="product-price">$39.00</span>
+            </div>
+            <p class="product-tagline">Soft pink light for dark rooms.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- WOMEN'S FASHION -->
+    <section class="section" id="women">
+      <div class="section-header">
+        <div class="section-title">Women’s Fashion</div>
+        <p class="section-subtitle">Dresses, jackets, and streetwear</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/7671159/pexels-photo-7671159.jpeg"
+              alt="Woman in pink and blue jacket"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">New Arrival</span>
+            <span class="product-price-tag">$69</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Cosmic Denim Jacket</h3>
+            <div class="product-meta">
+              <span>Denim Collection</span>
+              <span class="product-price">$69.00</span>
+            </div>
+            <p class="product-tagline">Deep blue denim, pink stitching.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/7671168/pexels-photo-7671168.jpeg"
+              alt="Woman with shopping bags at night"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Hot</span>
+            <span class="product-price-tag">$49</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Night Plaza Dress</h3>
+            <div class="product-meta">
+              <span>Party Wear</span>
+              <span class="product-price">$49.00</span>
+            </div>
+            <p class="product-tagline">Perfect for neon-lit streets.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/7671153/pexels-photo-7671153.jpeg"
+              alt="Woman in street style outfit"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Editor’s Pick</span>
+            <span class="product-price-tag">$54</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Midnight Street Set</h3>
+            <div class="product-meta">
+              <span>Streetwear</span>
+              <span class="product-price">$54.00</span>
+            </div>
+            <p class="product-tagline">Dark blue base with soft pink.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- MEN'S FASHION -->
+    <section class="section" id="men">
+      <div class="section-header">
+        <div class="section-title">Men’s Fashion</div>
+        <p class="section-subtitle">Casual & party styles</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg"
+              alt="Man in stylish jacket"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">New</span>
+            <span class="product-price-tag">$72</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Neon Edge Bomber</h3>
+            <div class="product-meta">
+              <span>Outerwear</span>
+              <span class="product-price">$72.00</span>
+            </div>
+            <p class="product-tagline">Dark blue jacket, pink zipper line.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/6311576/pexels-photo-6311576.jpeg"
+              alt="Man with phone and gadget"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Combo</span>
+            <span class="product-price-tag">$89</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Tech Night Pack</h3>
+            <div class="product-meta">
+              <span>Outfit + Gadget</span>
+              <span class="product-price">$89.00</span>
+            </div>
+            <p class="product-tagline">Perfect for gadget lovers.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- GADGETS -->
+    <section class="section" id="gadgets">
+      <div class="section-header">
+        <div class="section-title">Gadgets</div>
+        <p class="section-subtitle">Dark-mode devices & accessories</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg"
+              alt="Headphones with neon light"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Top Rated</span>
+            <span class="product-price-tag">$99</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Nightwave Headphones</h3>
+            <div class="product-meta">
+              <span>Audio</span>
+              <span class="product-price">$99.00</span>
+            </div>
+            <p class="product-tagline">Blue shell with pink glow ring.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Headphones closeup"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Bundle</span>
+            <span class="product-price-tag">$149</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Studio Glow Pack</h3>
+            <div class="product-meta">
+              <span>Headphones + Stand</span>
+              <span class="product-price">$149.00</span>
+            </div>
+            <p class="product-tagline">Includes neon stand and cable.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg"
+              alt="Laptop in dark neon room"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Pro</span>
+            <span class="product-price-tag">$899</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Midnight Creator Laptop</h3>
+            <div class="product-meta">
+              <span>14" Dark Mode</span>
+              <span class="product-price">$899.00</span>
+            </div>
+            <p class="product-tagline">Optimized for late-night work.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOME DECOR -->
+    <section class="section" id="home">
+      <div class="section-header">
+        <div class="section-title">Home Decor</div>
+        <p class="section-subtitle">Turn your room into a neon cave</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/3165336/pexels-photo-3165336.jpeg"
+              alt="Neon lights in a room"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Room Setup</span>
+            <span class="product-price-tag">$129</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Neon Wall Strip Kit</h3>
+            <div class="product-meta">
+              <span>LED Strips</span>
+              <span class="product-price">$129.00</span>
+            </div>
+            <p class="product-tagline">Blue and pink color presets.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/210265/pexels-photo-210265.jpeg"
+              alt="Modern lamp on table"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Classic</span>
+            <span class="product-price-tag">$45</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Aurora Desk Lamp</h3>
+            <div class="product-meta">
+              <span>Bedside</span>
+              <span class="product-price">$45.00</span>
+            </div>
+            <p class="product-tagline">Soft pink light with navy base.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- OFFERS -->
+    <section class="section" id="offers">
+      <div class="section-header">
+        <div class="section-title">🔥 Deals & Offers</div>
+        <p class="section-subtitle">Sample sale block with hover effects</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/5632371/pexels-photo-5632371.jpeg"
+              alt="Shopping cart in neon store"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Flash Sale</span>
+            <span class="product-price-tag">-40%</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Midnight Cart Bundle</h3>
+            <div class="product-meta">
+              <span>Mixed Items</span>
+              <span class="product-price">$199.00</span>
+            </div>
+            <p class="product-tagline">Massive night sale collection.</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img
+              src="https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg"
+              alt="Store aisle with clothes"
+            />
+            <div class="product-overlay"></div>
+            <span class="product-badge">Limited Time</span>
+            <span class="product-price-tag">-25%</span>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Aisle 7 Outfit Pack</h3>
+            <div class="product-meta">
+              <span>Mix & Match</span>
+              <span class="product-price">$139.00</span>
+            </div>
+            <p class="product-tagline">Dark blue basics + pink detail.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Nova Shop • Dark Blue & Pink Demo Layout</span>
+    <span>Built with pure HTML & CSS transitions</span>
+  </footer>
 
 </body>
 </html>
